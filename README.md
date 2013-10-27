@@ -1,5 +1,2 @@
-Gesior2012
+Development branch from - Tyano-Gesior
 ==========
-
-Gesior 2012 - Account Maker [website] for OTSes
-Select 'branch' for your OTS (TFS) version.

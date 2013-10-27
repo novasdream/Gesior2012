@@ -26,8 +26,8 @@ else
 	if($action == "")
 	{
 		$account_reckey = $account_logged->getCustomField("key");
-		if($account_logged->getPremDays() > 0)
-			$account_status = '<b><font color="green">Premium Account, '. $account_logged->getPremDays() .' days left</font></b>';
+		if($account_logged->getPremiumExpiration() > time())
+			$account_status = '<b><font color="green">Premium Account, '. date('d',$account_logged->getPremiumExpiration() - time()) .' days left</font></b>';
 		else
 			$account_status = '<b><font color="red">Free Account</font></b>';
 		if(empty($account_reckey))

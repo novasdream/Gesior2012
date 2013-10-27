@@ -8,8 +8,8 @@ class Account extends ObjectData
 	const LOADTYPE_NAME = 'name';
 	const LOADTYPE_MAIL = 'email';
 	public static $table = 'accounts';
-	public $data = array('name' => null, 'password' => null, 'premdays' => null, 'lastday' => null, 'email' => null, 'key' => null, 'group_id' => null, 'create_ip' => null, 'create_date' => null, 'premium_points' => null, 'page_access' => null, 'location' => null, 'rlname' => null, 'email_new' => null, 'email_new_time' => null, 'email_code' => null, 'next_email' => null, 'last_post' => null, 'flag' => null);
-	public static $fields = array('id', 'name', 'password', 'premdays', 'lastday', 'email', 'key', 'group_id', 'create_ip', 'create_date', 'premium_points', 'page_access', 'location', 'rlname', 'email_new', 'email_new_time', 'email_code', 'next_email', 'last_post', 'flag');
+	public $data = array('name' => null, 'password' => null, 'premiumExpiration' => null, 'lastday' => null, 'email' => null, 'key' => null, 'group_id' => null, 'create_ip' => null, 'create_date' => null, 'premium_points' => null, 'page_access' => null, 'location' => null, 'rlname' => null, 'email_new' => null, 'email_new_time' => null, 'email_code' => null, 'next_email' => null, 'last_post' => null, 'flag' => null);
+	public static $fields = array('id', 'name', 'password', 'premiumExpiration', 'lastday', 'email', 'key', 'group_id', 'create_ip', 'create_date', 'premium_points', 'page_access', 'location', 'rlname', 'email_new', 'email_new_time', 'email_code', 'next_email', 'last_post', 'flag');
 	public $players;
 	public $playerRanks;
 	public $guildAccess;
@@ -202,8 +202,8 @@ class Account extends ObjectData
 		$this->data['password'] = Website::encryptPassword($value, $this);
 	}
 	public function getPassword(){return $this->data['password'];}
-	public function setPremDays($value){$this->data['premdays'] = $value;}
-	public function getPremDays(){return $this->data['premdays'] - (date("z", time()) + (365 * (date("Y", time()) - date("Y", $this->data['lastday']))) - date("z", $this->data['lastday']));}
+	public function setPremiumExpiration($value){$this->data['premiumExpiration'] = $value;}
+	public function getPremiumExpiration(){$this->data['premiumExpiration'];}
 	public function setLastDay($value){$this->data['lastday'] = $value;}
 	public function getLastDay(){return $this->data['lastday'];}
 	public function setMail($value){$this->data['email'] = $value;}
@@ -253,6 +253,6 @@ class Account extends ObjectData
 
 	public function find($name){$this->loadByName($name);}
 	public function findByEmail($email){$this->loadByEmail($email);}
-	public function isPremium(){return ($this->getPremDays() > 0);}
+	public function isPremium(){return ($this->getpremiumExpiration() > time());}
 	public function getLastLogin(){return $this->getLastDay();}
 }
