@@ -253,6 +253,6 @@ class Account extends ObjectData
 
 	public function find($name){$this->loadByName($name);}
 	public function findByEmail($email){$this->loadByEmail($email);}
-	public function isPremium(){return ($this->getpremiumExpiration() > time());}
+	public function isPremium(){return ($this->getPremiumExpiration() > time());}
 	public function getLastLogin(){return $this->getLastDay();}
 }
